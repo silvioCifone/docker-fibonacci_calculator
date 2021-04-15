@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "fibonacci_client",
+      "image": "silviocifone/fibonaccicalculator-client",
+      "hostname": "fibonacci_client",
+      "essential": false
+    },
+    {
+      "name": "fibonacci_nginx",
+      "image": "silviocifone/fibonaccicalculator-nginx",
+      "hostname": "fibonacci_nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["fibonacci_client", "fibonacci_server"]
+    },
+    {
+      "name": "fibonacci_server",
+      "image": "silviocifone/fibonaccicalculator-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "fibonacci_worker",
+      "image": "silviocifone/fibonaccicalculator-worker",
+      "hostname": "fibonacci_worker",
+      "essential": false
+    }
+  ]
+}

@@ -7,9 +7,9 @@ before_install:
   - docker build -t silviocifone/fibonaccicalculatorreacttest -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true silviocifone/fibonaccicalculatorreacttest npm test 
+  - docker run -e CI=true silviocifone/fibonaccicalculatorreacttest npm test
 
-after_success: 
+after_success:
   - docker build -t silviocifone/fibonaccicalculator-client ./client
   - docker build -t silviocifone/fibonaccicalculator-nginx ./nginx
   - docker build -t silviocifone/fibonaccicalculator-server ./server
@@ -21,3 +21,15 @@ after_success:
   - docker push silviocifone/fibonaccicalculator-nginx
   - docker push silviocifone/fibonaccicalculator-server
   - docker push silviocifone/fibonaccicalculator-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: docker-fibonacci_calculator
+  env: Dockerfibonaccicalculator-env
+  bucket_name: elasticbeanstalk-us-east-2-482204740158
+  bucket_path: docker-fibonaccicalculator
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
