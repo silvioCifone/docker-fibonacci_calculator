@@ -4,14 +4,14 @@
     {
       "name": "fibonacci_client",
       "image": "silviocifone/fibonaccicalculator-client",
-      "hostname": "fibonacci_client",
+      "hostname": "fibonacciclient",
       "essential": false,
       "memory": 128
     },
     {
       "name": "fibonacci_nginx",
       "image": "silviocifone/fibonaccicalculator-nginx",
-      "hostname": "fibonacci_nginx",
+      "hostname": "fibonaccinginx",
       "essential": true,
       "portMappings": [
         {
@@ -32,7 +32,7 @@
     {
       "name": "fibonacci_worker",
       "image": "silviocifone/fibonaccicalculator-worker",
-      "hostname": "fibonacci_worker",
+      "hostname": "fibonacciworker",
       "essential": false,
       "memory": 128
     }
